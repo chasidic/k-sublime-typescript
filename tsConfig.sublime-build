@@ -1,0 +1,12 @@
+{
+  "selector": "source.ts",
+  "cmd": [
+    "node",
+    "$packages/k-sublime-typescript/src/runTs.js",
+    "$file",
+    "$packages"
+  ],
+
+  "target": "ansi_color_build",
+  "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
+}
