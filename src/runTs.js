@@ -9,9 +9,6 @@ const file = process.argv.pop();
 const DIR = path.dirname(file);
 const BT = '`';
 
-console.log(process.argv)
-
-return;
 
 let killMsg = (msg) => {
   console.log(`TS BUILD ERROR: ${ msg} `)

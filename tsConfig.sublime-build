@@ -3,8 +3,7 @@
   "cmd": [
     "node",
     "$packages/k-sublime-typescript/src/runTs.js",
-    "$file",
-    "$packages"
+    "$file"
   ],
 
   "target": "ansi_color_build",
