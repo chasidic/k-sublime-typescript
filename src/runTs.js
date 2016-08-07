@@ -9,7 +9,6 @@ const file = process.argv.pop();
 const DIR = path.dirname(file);
 const BT = '`';
 
-
 let killMsg = (msg) => {
   console.log(`TS BUILD ERROR: ${ msg} `)
   process.exit(1);
@@ -46,7 +45,22 @@ let tsc = path.join(pkDir, 'node_modules/.bin/tsc')
 if (!fs.existsSync(tsc))
   killMsg(`${BT}${ tsc }${BT} not found.\n\nplease run ${BT}npm install typescipt${BT} [--save/--save-dev]\n`)
 
-if (spawnSync(tsc, ['--project', tsDir], { stdio: 'inherit' }).status !== 0)
+let params = [];
+
+for (let key in tsJSON.compilerOptions) {
+  const flag = `--${ key }`;
+  const value = tsJSON.compilerOptions[key];
+  if (typeof value === 'boolean') {
+    if (value) { params.push(flag) }
+  } else {
+    params.push(flag)
+    params.push(value);
+  }
+}
+
+params.push(file)
+
+if (spawnSync(tsc, params, { stdio: 'inherit' }).status !== 0)
   killMsg('tsc compile failed')
 
 let outDir = (tsJSON && tsJSON.compilerOptions && tsJSON.compilerOptions.outDir) ? path.resolve(tsDir, tsJSON.compilerOptions.outDir) : null;
