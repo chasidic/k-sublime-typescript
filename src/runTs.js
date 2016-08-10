@@ -60,7 +60,7 @@ for (let key in tsJSON.compilerOptions) {
 
 params.push(file)
 
-if (spawnSync(tsc, params, { stdio: 'inherit' }).status !== 0)
+if (spawnSync(tsc, params, { stdio: 'inherit', cwd: tsDir }).status !== 0)
   killMsg('tsc compile failed')
 
 let outDir = (tsJSON && tsJSON.compilerOptions && tsJSON.compilerOptions.outDir) ? path.resolve(tsDir, tsJSON.compilerOptions.outDir) : null;
